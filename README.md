@@ -1,0 +1,1 @@
+Projeto final da disciplina de Comunicação de Dados que simula um sistema de transmissão de mensagens. O software utiliza a codificação de linha 8B6T, criptografia AES-GCM para segurança, e realiza a comunicação entre dois computadores via sockets TCP. A interface gráfica exibe todo o processo, incluindo a forma de onda do sinal gerado.
