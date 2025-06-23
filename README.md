@@ -9,4 +9,3 @@ Para a implementação da lógica de codificação, utilizamos uma tabela de map
 * **Autores:**
     * [Omkar Prabhu (omkarprabhu-98)](https://github.com/omkarprabhu-98)
     * [Dibyadarshan Hota (Dibyadarshan)](https://github.com/Dibyadarshan)
-* **Licença:** [Nome da Licença]
