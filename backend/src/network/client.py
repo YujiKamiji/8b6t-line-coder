@@ -1,8 +1,8 @@
 import socket
 import os
-from src.crypto.aes_256_gcm import CryptoManager
-from src.coding.b8t6 import LineCoding8B6T
-from src.plotting.plotting import Plotting
+from backend.src.crypto.aes_256_gcm import CryptoManager
+from backend.src.coding.b8t6 import LineCoding8B6T
+from backend.src.plotting.plotting import Plotting
 
 class Client:
     """
@@ -21,9 +21,10 @@ class Client:
         print("cliente de comunicacao segura 8b6t iniciado")
         print(f"conectando em {self.host}:{self.port}")
 
-    def send_message(self, message: str):
+    def send_message(self, message: str) -> tuple[str, str]:
         """
         processa uma mensagem (criptografa, codifica) e envia ao servidor
+        retorna o pacote criptografado em formato hexadecimal e o sinal codificado em 8b6t par amostrar na GUI
         """
         print(f"preparando a mensagem: '{message}'")
         
@@ -31,6 +32,7 @@ class Client:
         print("criptografando a mensagem")
 
         pacote_criptografado = self.crypto_manager.encrypt(message_bytes)
+        pacote_hex = pacote_criptografado.hex()
         print(f"mensagem criptografada no formato hexadecimal: '{pacote_criptografado.hex()}'")
         print(f"tamanho da mensagem criptografada: ({len(pacote_criptografado)} bytes)")
 
@@ -60,6 +62,8 @@ class Client:
             print(f"erro: endereco do host '{self.host}' nao encontrado")
         except Exception as e:
             print(f"erro inesperado na rede: {e}")
+
+        return pacote_hex, sinal_para_enviar
 
 if __name__ == '__main__':
     server_ip = input("digite o endereco ip do servidor: ")

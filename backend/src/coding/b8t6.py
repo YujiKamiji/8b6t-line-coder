@@ -9,7 +9,7 @@ class LineCoding8B6T:
         self._initialize_tables()           #chama o método para inicializar as tabelas
 
     def _initialize_tables(self):           #preencher as tabelas de mapeamento
-        json_path = Path(__file__).parent / 'b8t6_table.json'
+        json_path = Path(__file__).parent / '8b6t_table.json'
         
         with open(json_path, 'r', encoding='utf-8') as file:
             data_from_json = json.load(file)
