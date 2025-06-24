@@ -2,6 +2,7 @@ import socket
 import os
 from src.crypto.aes_256_gcm import CryptoManager
 from src.coding.b8t6 import LineCoding8B6T
+from src.plotting.plotting import Plotting
 
 class Client:
     """
@@ -28,12 +29,16 @@ class Client:
         
         message_bytes = message.encode('utf-8')
         print("criptografando a mensagem")
+
         pacote_criptografado = self.crypto_manager.encrypt(message_bytes)
-        print(f"mensagem criptografada ({len(pacote_criptografado)} bytes)")
+        print(f"mensagem criptografada no formato hexadecimal: '{pacote_criptografado.hex()}'")
+        print(f"tamanho da mensagem criptografada: ({len(pacote_criptografado)} bytes)")
 
         print("codificando os dados criptografados em formato 8b6t")
         sinal_para_enviar = self.line_coder.encode(pacote_criptografado)
-        print(f"sinal 8b6t gerado ({len(sinal_para_enviar)} simbolos)")
+        print(f"sinal 8b6t: '{sinal_para_enviar}'")
+        print(f"sinal 8b6t gerado com ({len(sinal_para_enviar)} simbolos)")
+        #Plotting.plot_8b6t(sinal_para_enviar, save_path="grafico_8b6t_envio.png")
 
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
