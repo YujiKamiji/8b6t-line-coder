@@ -2,6 +2,7 @@ import socket
 import os
 from src.crypto.aes_256_gcm import CryptoManager
 from src.coding.b8t6 import LineCoding8B6T
+from src.plotting.plotting import Plotting
 
 class Server:
     """
@@ -40,18 +41,22 @@ class Server:
                 print("cliente desconectou sem enviar dados")
                 return
 
-            print(f"sinal 8b6t recebido ({len(sinal_recebido)} simbolos)")
+            print(f"sinal 8b6t recebido: '{sinal_recebido}'")
+            print(f"sinal 8b6t recebido com ({len(sinal_recebido)} simbolos)")
+            #Plotting.plot_8b6t(sinal_recebido, save_path="grafico_8b6t_recebimento.png")
 
-            print("decodificando o sinal 8b6t")
+            print("decodificando o sinal 8b6t para obter a mensagem criptografada")
             pacote_criptografado = self.line_coder.decode(sinal_recebido)
 
             if pacote_criptografado:
-                print(f"pacote decodificado ({len(pacote_criptografado)} bytes), descriptografando")
+                print(f"mensagem criptografada no formato hexadecimal: '{pacote_criptografado.hex()}'")
+                print(f"tamanho da mensagem criptografada: ({len(pacote_criptografado)} bytes), descriptografando")
                 mensagem_final = self.crypto_manager.decrypt(pacote_criptografado)
                 
                 if mensagem_final:
                     print("mensagem recuperada e verificada:")
-                    print(f"conteudo: '{mensagem_final.decode('utf-8')}'")
+                    print(f"conteudo em hexadecimal: '{mensagem_final.hex()}' ")
+                    print(f"conteudo original: '{mensagem_final.decode('utf-8')}'")
                     client_socket.sendall(b"OK: mensagem recebida e decifrada com sucesso.")
                 else:
                     print("falha na descriptografia")
@@ -81,7 +86,7 @@ class Server:
         finally:
             self.server_socket.close()
             print("socket do servidor fechado")
-            
+
 if __name__ == '__main__':
     HOST_ADDR = '0.0.0.0'
     PORT_NUM = 9999
