@@ -22,7 +22,7 @@ Este é o projeto final da disciplina **Comunicação de Dados**, que simula um 
 ## 🛠 Requisitos
 
 - Python 3.10 ou superior
--Instale as dependências com:
+- Instale as dependências com:
 
 ```bash
 pip install -r requirements.txt
