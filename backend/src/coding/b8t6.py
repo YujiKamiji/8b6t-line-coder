@@ -29,6 +29,7 @@ class LineCoding8B6T:
         for byte in data_bytes:
             entry = self.mapping_table.get(byte)
             if not entry:
+                print(f"[debug] byte {byte} ({hex(byte)}) nao encontrado na tabela 8b6t")
                 raise ValueError(f"Byte {hex(byte)} não encontrado na tabela de mapeamento.")
 
             code_to_send = entry['code']
