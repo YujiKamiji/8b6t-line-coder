@@ -81,3 +81,14 @@ class Server:
         finally:
             self.server_socket.close()
             print("socket do servidor fechado")
+            
+if __name__ == '__main__':
+    HOST_ADDR = '0.0.0.0'
+    PORT_NUM = 9999
+    SECRET_KEY = os.urandom(32)
+    
+    print("Execute o cliente com esta chave secreta:")
+    print(f"CHAVE HEX: {SECRET_KEY.hex()}")
+    
+    server = Server(host=HOST_ADDR, port=PORT_NUM, secret_key=SECRET_KEY)
+    server.start()
