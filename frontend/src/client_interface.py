@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import matplotlib.pyplot as plt
 from backend.src.network.client import Client 
 from backend.src.plotting.plotting import Plotting
 
@@ -94,4 +95,5 @@ class ClientScreen(tk.Frame):
         self.valor_codificado.delete("1.0", tk.END)
         self.valor_codificado.insert(tk.END, sinal_8b6t)
 
+        plt.close('all')
         Plotting.plot_8b6t(sinal_8b6t)
