@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 import os
+import matplotlib.pyplot as plt
 from backend.src.network.server import Server
+from backend.src.plotting.plotting import Plotting
 
 class ServerScreen(tk.Frame):
     def __init__(self, master=None, on_back=None):
@@ -87,6 +89,8 @@ class ServerScreen(tk.Frame):
         self._set_text(self.signal_text, signal)
         self._set_text(self.encrypted_text, encrypted)
         self._set_text(self.decrypted_text, decrypted)
+        plt.close('all')
+        Plotting.plot_8b6t(signal)
 
     def update_info(self, ip, port, key, hash_):
         self._set_entry(self.ip_entry, ip)

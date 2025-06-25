@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from backend.src.plotting.plotting import Plotting
 
 class LineCoding8B6T:
     def __init__(self):
@@ -72,3 +73,19 @@ class LineCoding8B6T:
             decoded_bytes.append(original_byte)
 
         return bytes(decoded_bytes)
+    
+if __name__ == '__main__':
+    coder = LineCoding8B6T()
+
+    # Definindo os valores em hexadecimal (0x11, 0x53, 0x50)
+    dados = bytes([0x11, 0x53, 0x50])
+    
+    print("Bytes de entrada:", dados.hex())
+
+    try:
+        codificado = coder.encode(dados)
+        print("Sinal codificado (8B6T):", codificado)
+    except Exception as e:
+        print("Erro na codificação:", e)
+
+    Plotting.plot_8b6t(codificado)
